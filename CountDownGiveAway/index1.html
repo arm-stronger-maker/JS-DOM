@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Giveaway Countdown</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center h-screen bg-red-400">
+  
+    <div class="text-center">
+        <!-- Image Section --> 
+        <img src="./Iphone.jpeg" alt="iPhone" class="mx-auto mb-12 rounded w-auto h-96 shadow-lg">
+ 
+        <!-- Description Section -->
+        <h1 class="text-4xl md:text-6xl mb-10 font-bold text-gray-800">iPhone 14 Pro Max Giveaway!</h1>
+        <p class="text-2xl mb-6 text-white w-4/5 mx-auto">Don't miss your chance to win the latest iPhone 14 Pro Max! Participate in our giveaway and stand a chance to be the lucky winner.</p>
+
+        <!-- Countdown Timer -->
+        <div class="text-7xl font-bold text-purple-900 mb-4">
+            <span id="days">00</span> Days : 
+            <span id="hours">00</span> Hours : 
+            <span id="minutes">00</span> Minutes : 
+            <span id="seconds">00</span> Seconds
+        </div>
+    </div>
+
+    <script>
+        // Get the final time for the ending
+        const countdownDate = new Date("Dec 31, 2024 23:59:59").getTime();
+
+          // Update the countdown every second
+          const countdownFunction = setInterval(function() {
+
+            // Get current time
+            const now = new Date().getTime();
+
+            // Get the exact running time
+            const distance = countdownDate - now;
+
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result.
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.querySelector(".text-7xl").innerText = "Giveaway Ended";
+            }
+
+        }, 1000);
+
+
+        
+
+    </script>
+
+</body>
+</html>

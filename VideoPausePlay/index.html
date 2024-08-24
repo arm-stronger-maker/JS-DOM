@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-400 relative">
+        <header class="flex items-center h-screen pb-8 justify-center">
+            <video id="video" autoplay muted loop>
+                <source src="./video.mp4">
+            </video>
+            <button class="absolute bg-red-600 text-white px-16 rounded-full hover:bg-green-700 py-2 bottom-16 md:bottom-52" id="button">Play/Pause</button>
+        </header>
+
+
+        <script>
+            const video = document.getElementById('video');
+            const button = document.getElementById('button');
+
+            let currentState = true;
+
+            button.addEventListener('click', function(){
+                if(currentState){
+                    video.pause();
+                    currentState = false;
+                    button.innerHTML = 'Play'
+                }else{
+                    video.play();
+                    currentState = true;
+                    button.innerHTML = 'Pause'
+                }
+            })
+        </script>
+</body>
+</html>

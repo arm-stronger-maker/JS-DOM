@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Noter</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-purple-300 flex flex-col justify-center items-center h-screen pb-16">
+    <h1 class="font-bold pb-4 text-3xl font-serif">Grocery Adder</h1>
+    <button id="addGroceryBtn" class="px-14 py-2 mb-5 text-gray-200 bg-green-600 hover:bg-green-700 text-xl">Add Items!</button>
+
+    <div id="groceryModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">  
+        <div class="w-2/3 px-4 md:w-1/3 bg-white rounded p-6">
+            <h2 class="font-medium pb-3" id="modalTitle">Add Grocery</h2>  
+            <input id="inputField" type="text" class="w-full pl-3 rounded border-gray-300 py-3" placeholder="Add your items">
+            <div class="pt-3 space-x-3">  
+                <button id="addButton" class="px-8 py-2 rounded hover:text-white bg-yellow-500">Add</button>
+                <button id="cancelButton" class="px-6 py-2 rounded hover:text-white bg-red-500">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successMessage" class="bg-purple-400 hidden font-semibold text-gray-600 rounded p-2">
+        Grocery item added successfully
+    </div>
+
+    <ul id="groceryList" class="w-2/3 px-4 md:w-1/3 mt-3 space-y-3">
+      
+    </ul>
+
+    <audio src="./mixkit-sci-fi-click-900.wav" preload="auto" id="addMusic"></audio>
+    <audio src="./mixkit-correct-answer-tone-2870.wav" preload="auto" id="deleteMusic"></audio>
+    <audio src="./mixkit-software-interface-start-2574.wav" preload="auto" id="editMusic"></audio>
+
+    <script>
+        const addMusic = document.getElementById('addMusic');
+        const deleteMusic = document.getElementById('deleteMusic');
+        const editMusic = document.getElementById('editMusic');
+
+        const groceryList = document.getElementById('groceryList');
+        const successMessage = document.getElementById('successMessage');
+        
+        const modalTitle = document.getElementById('modalTitle');
+        const inputField = document.getElementById('inputField');
+        const addButton = document.getElementById('addButton');
+        const cancelButton = document.getElementById('cancelButton');
+        
+        const addGroceryBtn = document.getElementById('addGroceryBtn'); // initail modal trigger
+        const groceryModal = document.getElementById('groceryModal'); // Once the above button is clicked, this modal will be shown.
+
+        let editingItem = null;  // It had the grocery instance text.
+
+        // Function to load grocery list from localStorage
+        function loadGroceries() {
+            const groceries = JSON.parse(localStorage.getItem('groceries')) || [];
+            groceries.forEach(item => addGroceryItemToDOM(item));
+        }
+
+        // Function to save grocery list to localStorage
+        function saveGroceries() {
+            const items = [];
+            groceryList.querySelectorAll('li').forEach(li => {
+                items.push(li.querySelector('span').textContent);
+            });
+            localStorage.setItem('groceries', JSON.stringify(items));
+        }
+
+        function addGroceryItemToDOM(item) {
+            const listItem = document.createElement('li');
+            listItem.className = 'flex justify-between items-center bg-white rounded shadow p-4';
+            listItem.innerHTML = `
+                <span>${item}</span>
+                <div>
+                    <button class="editBtn text-blue-500 hover:underline mr-2">Edit</button>
+                    <button class="deleteBtn text-red-500 hover:underline">Delete</button>
+                </div>
+            `;
+            groceryList.appendChild(listItem);
+        }
+
+        function hideModal() {
+            groceryModal.classList.add('hidden');
+            editingItem = null;
+        }
+
+        function showModal() {
+            groceryModal.classList.remove('hidden');
+            inputField.value = editingItem ? editingItem.textContent : '';
+            inputField.focus();
+            modalTitle.textContent = editingItem ? 'Edit Grocery' : 'Add Grocery';
+            addButton.textContent = editingItem ? 'Save' : 'Add';
+        }
+
+        function showSuccessMessage(message) {
+            successMessage.textContent = message;
+            successMessage.classList.remove('hidden');
+            setTimeout(() => successMessage.classList.add('hidden'), 2000);
+        }
+
+        cancelButton.addEventListener('click', hideModal);
+        addGroceryBtn.addEventListener('click', showModal);
+
+        addButton.addEventListener('click', function() {
+            const getValue = inputField.value.trim();
+            if (getValue) {
+                if (editingItem) {
+                    editingItem.textContent = getValue;
+                    showSuccessMessage('Grocery Item successfully edited');
+                    setTimeout(() => {
+                        editMusic.play();
+                    }, 1000);
+                } else {
+                    addGroceryItemToDOM(getValue);
+                    showSuccessMessage('Grocery Item added successfully');
+                    addMusic.play();
+                }
+                saveGroceries(); // Save updated list to localStorage
+                hideModal();
+            }
+        });
+
+        groceryList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('editBtn')) {
+                editingItem = e.target.closest('li').querySelector('span');
+                showModal();
+            } else if (e.target.classList.contains('deleteBtn')) {
+                const listItem = e.target.closest('li');
+                groceryList.removeChild(listItem);
+                showSuccessMessage('Successfully removed');
+                deleteMusic.play();
+                saveGroceries(); // Save updated list to localStorage
+            }
+        });
+
+        // Load grocery list when the page is loaded
+        loadGroceries();
+    </script>
+</body>
+</html>

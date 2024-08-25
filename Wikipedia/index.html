@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia Searcher</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="shortcut icon" href="https://www.svgrepo.com/show/63312/wikipedia.svg" type="image/x-icon">
+</head>
+<body>
+    <div class="flex justify-center flex-col items-center mt-9">
+        <h1 class="font-bold text-4xl mb-7">Wikipedia</h1>
+       
+        <input id="searchInput" type="text" placeholder="Wikipedia..." class="mb-5 w-full max-w-md px-7  py-3 focus:outline-none border border-blue-600 focus:ring-2 focus:ring-blue-500 rounded-full bg-gray-200 ">
+         
+        <button id="searchButton" class="bg-purple-500 px-16 py-2 rounded-full text-white  font-normal text-lg hover:bg-gray-700">Search</button>
+
+        <div class="w-full max-w-3xl mt-8" id="results">
+
+        </div>
+    </div> 
+    
+    <script src="app.js"></script>
+</body>
+</html>

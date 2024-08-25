@@ -52,19 +52,30 @@
 
         let editingItem = null;  // It had the grocery instance text.
 
-        // Function to load grocery list from localStorage
+
+        // Function to "load" grocery list from localStorage
+        /*
+        localStorage.getItem('groceries') retrieves the grocery list as a string from localStorage.
+        JSON.parse() takes that string and converts it into a JavaScript array (or object, depending on the structure of the string).
+        If localStorage doesn't have any groceries saved (i.e., returns null), the || [] part ensures that groceries will be an empty array instead of null.
+        */
         function loadGroceries() {
             const groceries = JSON.parse(localStorage.getItem('groceries')) || [];
             groceries.forEach(item => addGroceryItemToDOM(item));
         }
 
-        // Function to save grocery list to localStorage
+        
+        // Function to "save" grocery list to localStorage
         function saveGroceries() {
             const items = [];
             groceryList.querySelectorAll('li').forEach(li => {
-                items.push(li.querySelector('span').textContent);
+                items.push(li.querySelector('span').textContent); // Span contains the actual grocery name. 
             });
             localStorage.setItem('groceries', JSON.stringify(items));
+            /* JSON.stringify => Converts a JavaScript object or array into a JSON string.
+               before being stored in localStorage, we convert the object or array into A string.
+               This is necessary because localStorage can only store data as strings, not as objects or arrays.
+            */
         }
 
         function addGroceryItemToDOM(item) {
@@ -139,3 +150,14 @@
     </script>
 </body>
 </html>
+
+
+
+<!-- 
+                property is used to get or set the text content inside an HTML element, excluding any HTML tags or markup.
+textContent =>  It removes out any HTML tags and only returns the plain text within the element.
+                இது எந்த HTML குறிச்சொற்களையும் அகற்றி, உறுப்புக்குள் எளிய உரையை மட்டுமே வழங்குகிறது.
+
+
+
+-->

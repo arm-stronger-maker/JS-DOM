@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS Transition Timing Functions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for transition properties */
+        .transition-ease { transition-timing-function: ease; }
+        .transition-ease-in { transition-timing-function: ease-in; }
+        .transition-ease-out { transition-timing-function: ease-out; }
+        .transition-ease-in-out { transition-timing-function: ease-in-out; }
+        .transition-linear { transition-timing-function: linear; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-8">
+    <h1 class="text-3xl font-bold mb-8">CSS Transition Timing Functions</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Ease -->
+        <div class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-blue-500 hover:bg-blue-700 transition duration-1000 transition-ease hover:translate-x-16"></div>
+            <p class="mt-2 text-center">Ease (default)</p>
+        </div>
+
+        <!-- Ease-in -->
+        <div class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-green-500 hover:bg-green-700 transition duration-1000 transition-ease-in hover:translate-x-16"></div>
+            <p class="mt-2 text-center">Ease-in</p>
+        </div>
+
+        <!-- Ease-out -->
+        <div class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-red-500 hover:bg-red-700 transition duration-1000 transition-ease-out hover:translate-x-16"></div>
+            <p class="mt-2 text-center">Ease-out</p>
+        </div>
+
+        <!-- Ease-in-out -->
+        <div class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-yellow-500 hover:bg-yellow-700 transition duration-1000 transition-ease-in-out hover:translate-x-16"></div>
+            <p class="mt-2 text-center">Ease-in-out</p>
+        </div>
+
+        <!-- Linear -->
+        <div class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-purple-500 hover:bg-purple-700 transition duration-1000 transition-linear hover:translate-x-16"></div>
+            <p class="mt-2 text-center">Linear</p>
+        </div>
+    </div>
+
+    <p class="mt-8 text-center max-w-md">Hover over each box to see the transition effect. The boxes will move to the right using different timing functions.</p>
+</body>
+</html>

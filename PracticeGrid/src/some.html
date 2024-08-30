@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Transition</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../src/input.css">
+    <link rel="stylesheet" href="../src/output.css">
+    <style>
+        .transition-ease { transition-timing-function: ease;}
+        .transition-ease-in { transition-timing-function: ease-in;}
+        .transition-ease-out { transition-timing-function: ease-out;}
+        .transition-ease-in-out { transition-timing-function: ease-in-out;}
+        .transition-linear {  transition-timing-function: steps(5, end);;}
+
+    </style>
+</head>
+<body class="bg-gray-300">
+    <section class="container mx-auto">
+    <div class="flex flex-col h-screen items-center justify-center">
+        <h1 class="mb-10 text-3xl text-center pt-10 font-bold font-kskdsfsd">CSS Transition Timing Functions</h1>
+        <div class="flex flex-wrap md:px-56 px-10 gap-y-5 gap-x-5 pb-10">
+            <div class="px-20 text-center font-medium py-10 rounded flex-1 bg-blue-400   transition duration-1000 transition-ease hover:translate-x-16 hover:bg-blue-600">Ease</div>
+            <div class="px-20 text-center font-medium py-10 rounded flex-1 bg-red-400    transition duration-1000 transition-ease-in hover:translate-x-20 hover:bg-red-600">Ease-in</div>
+            <div class="px-20 text-center font-medium py-10 rounded flex-1 bg-green-400  transition duration-1000 transition-ease-out hover:translate-x-16 hover:bg-green-600">Ease-out</div>
+            <div class="px-20 text-center font-medium py-10 rounded flex-0 bg-purple-400 transition duration-1000 transition-ease-in-out hover:translate-x-16 hover:bg-purple-600">Ease-in-out</div>
+            <div class="px-20 text-center font-medium py-10 rounded flex-1 bg-pink-400   transition duration-1000 transition-linear hover:translate-x-16 hover:bg-pink-600">Linear</div>
+        </div>
+        <p class="text-center flex font-medium">Hover over each box to see the transition effect. <br> The boxes will move to the right using different timing functions.</p>
+    </div>
+    </section>
+</body>
+</html>
